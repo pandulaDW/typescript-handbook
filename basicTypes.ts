@@ -38,4 +38,56 @@ console.log(c2) // 1
 
 enum Color3 { Red = 2, Green = 4, Blue = 5 }
 let colorName: string = Color3[4] // can do lookups like this 
-console.log(colorName) 
+console.log(colorName)
+
+// Any 
+// when we want to opt-out of type checking and let the values pass through compile-time checks
+let notSure: any = 4
+notSure = "maybe a string instead"
+notSure = false; // okay, definitely a boolean
+notSure.ifItExists(); // okay, ifItExists might exist at runtime
+notSure = { toFixed: () => { } }
+notSure.toFixed(); // okay, toFixed exists (but the compiler doesn't check)
+let list3: any[] = [1, true, "free"]
+list3[1] = 100;
+
+// void is a little like the opposite of any: the absence of having any type at all
+function warnUser(): void {
+    console.log("This is my warning message")
+}
+
+// In TypeScript, both undefined and null actually have their own types named undefined
+//  and null respectively. Much like void, they’re not extremely useful on their own:
+
+// Never 
+// The never type represents the type of values that never occur
+// Function returning never must have unreachable end point
+function error(message: string): never {
+    throw new Error(message);
+}
+
+function fail(): never {
+    return error("something failed")
+}
+
+// Function returning never must have unreachable end point
+function infiniteLoop(): never {
+    while (true) {
+
+    }
+}
+
+// Object 
+// object is a type that represents the non-primitive type,
+//  i.e. anything that is not number, string, boolean, bigint, symbol, null, or undefined.
+
+
+// Type assertions 
+// A type assertion is like a type cast in other languages, but performs no special checking or restructuring of data.
+
+// Type assertions have two forms. One is the “angle-bracket” syntax:
+let someValue: any = "this is a string"
+let strLength: number = (<string>someValue).length;
+
+// And the other is the as-syntax:
+let strLength2: number = (someValue as string).length; 
