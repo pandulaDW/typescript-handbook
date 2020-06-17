@@ -67,3 +67,37 @@ let ro: ReadonlyArray<number> = a;
 
 // The easiest way to remember whether to use readonly or const is to ask whether you’re
 //  using it on a variable or a property. Variables use const whereas properties use readonly.
+
+// Excess Property Checks ////////////////////////
+// to have extra properties without modifying the interface
+createSquare({ color: "blue", width: 20, opacity: 0.5 } as SquareConfig)
+
+// or you can do below 
+// SquareConfig can have any number of properties, and as long as they aren’t color or width,
+//  their types don’t matter.
+interface SquareConfig2 {
+    color?: string
+    width?: number
+    [propname: string]: any
+}
+
+
+/// Function Types ///////////////////////////////////
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+
+let mySearch: SearchFunc;
+mySearch = function (src: string, sub: string): boolean {
+    let result = src.search(sub);
+    return result > -1;
+}
+
+// implicit type checks 
+let mySearch2: SearchFunc;
+mySearch2 = function (src, sub) {
+    let result = src.search(sub);
+    return result > -1;
+}
+
+// Indexable Types ////////////////////////////
