@@ -5,3 +5,4 @@
 - Types
 - Variable declaration (var, let and const)
 - Interfaces
+- Functions
